@@ -3,18 +3,6 @@
     --negative-margin-logo: -40px;
 }
 
-* {
-    text-transform: uppercase;
-    font-family: 'Bebas Neue', 'Times New Roman', 'Arial';
-    text-align: center;
-    font-weight: bold;
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
 body {
     display: grid;
     grid-template-columns: 

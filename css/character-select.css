@@ -1,0 +1,83 @@
+body {
+    display: grid;
+    grid-template-rows: 60% 20% 20%;
+    grid-template-areas: 
+        "character-image"
+        "character-select-buttons"
+        "confirm-button";
+}
+
+:root {
+    --watson-color: yellow;
+    --gura-color: blue;
+    --mori-color: pink;
+    --kiara-color: red;
+    --ina-color: purple;
+}
+
+#watson:hover {
+    background-color: var(--watson-color);
+}
+
+#gura:hover {
+    background-color: var(--gura-color);
+}
+
+#mori:hover {
+    background-color: var(--mori-color);
+}
+
+#kiara:hover {
+    background-color: var(--kiara-color);
+}
+
+#ina:hover {
+    background-color: var(--ina-color);
+}
+
+
+#big-avatar {
+    grid-area: character-image;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#default-big-avatar {
+    font-size: 5em;
+}
+
+#character-name-text {
+    font-size: 4em;
+    margin-bottom: 0em;
+}
+
+#character-image {
+    height: 80%;
+}
+
+#smol-character-select {
+    grid-area: character-select-buttons;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#smol-character-select button{
+    height: 10em;
+    width: 10em;
+    margin-right: 2em;
+    border: 1px solid black;
+    background-color: white;
+}
+
+#smol-character-select button img {
+    width: 100%;
+    height: 100%;
+}
+
+#confirm-selection-button {
+    font-size: 4em;
+    padding: 0.25em 1em;
+}

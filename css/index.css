@@ -1,0 +1,14 @@
+/* stores all css shared between pages */
+@import url('http://fonts.cdnfonts.com/css/bebas-neue');
+
+* {
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', 'Times New Roman', 'Arial';
+    text-align: center;
+    font-weight: bold;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
