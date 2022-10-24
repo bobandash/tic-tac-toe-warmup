@@ -1,0 +1,108 @@
+
+:root {
+    --negative-margin-logo: -40px;
+}
+
+* {
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', 'Times New Roman', 'Arial';
+    text-align: center;
+    font-weight: bold;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 
+        1fr minmax(300px, 1600px) 1fr;
+    grid-template-rows:
+        20% 50% 30%;
+    grid-template-areas:
+        "header header header"
+        ". hololive-image ."
+        ". selection-options .";
+}
+
+#homepage-header {
+    grid-area: header;
+    display: flex;
+    justify-content: center;
+    padding-top: 3em;
+    padding-bottom: 2em;
+}
+
+#hololive-logo {
+    height: 6em;
+    align-self: column;
+}
+
+#header-text {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#header-text * {
+    margin: 0;
+    text-align: left;
+    margin-left: var(--negative-margin-logo);
+}
+
+#tic-tac-toe-text {
+    font-size: 3.5em;
+    margin-bottom: 0em;
+}
+
+#holomyth-ed-text {
+    color: #00FFF0;
+    margin-left: calc(var(--negative-margin-logo) + .25em);
+}
+
+#holomyth-background {
+    grid-area: hololive-image;
+    margin: 0 auto;
+    height: 100%;
+}
+
+#user-inputs {
+    grid-area: selection-options;
+}
+
+#labels, #selects {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#labels * {
+    text-align: right;
+    margin-right: 1.5em;
+    margin-top: .5em;
+}
+
+#selects * {
+    margin-top: .5em;
+}
+
+#selects option:nth-child(1) {
+    margin-top: 2em;
+}
+
+
+label, select, button {
+    font-size: 2em;
+}
+
+#form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#start-game {
+    margin-top: 1em;
+}

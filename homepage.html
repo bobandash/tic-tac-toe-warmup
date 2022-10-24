@@ -4,9 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Holomyth Tic Tac Toe</title>
+    <link rel="stylesheet" href="https://use.typekit.net/qyv3ukk.css">
+    <link rel = "stylesheet" href = "css/homepage.css">
+    <script src = "js/homepage.js" defer></script>
 </head>
 <body>
-    
+     <div id = "homepage-header">
+        <img id = "hololive-logo" src = "hololive-assets/logo/hololive.png">
+        <div id = "header-text">
+            <h1 id = "tic-tac-toe-text">Tic Tac Toe</h1>
+            <h2 id = "holomyth-ed-text">Holomyth edition</h2>
+        </div>
+     </div>
+     <img id = "holomyth-background" src = "hololive-assets/backgrounds/wallpaper.jpg">
+     <div id = "user-inputs">
+        <div id = "form">
+            <div id = "labels">
+                <label for = "opponent-type">Versus</label>
+                <label for = "ai-difficulty">Difficulty</label>
+            </div>
+            <div id = "selects">
+                <select name = "opponent-type" id = "opponent-type">
+                    <option value = "player">Player</option>
+                    <option value = "ai">AI</option>
+                </select>
+                <select name = "ai-difficulty" id = "ai-difficulty">
+                    <option value = "Easy">Easy</option>
+                    <option value = "Medium">Medium</option>
+                    <option value = "Hard">Hard</option>
+                </select>
+            </div>
+        </div>
+        <button id = "start-game">Start Game</button>
+    </div>
+
 </body>
 </html>
