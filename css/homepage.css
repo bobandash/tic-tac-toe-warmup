@@ -76,10 +76,6 @@ body {
     margin-top: .5em;
 }
 
-#selects option:nth-child(1) {
-    margin-top: 2em;
-}
-
 
 label, select, button {
     font-size: 2em;
@@ -93,4 +89,6 @@ label, select, button {
 
 #start-game {
     margin-top: 1em;
+    padding: .5em;
+    background-color: white;
 }
