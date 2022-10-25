@@ -8,6 +8,7 @@ function changeSelection() {
     removeButtonBackgroundcolors();
     addCurrCharacter(this);
     addConfirmButton();
+    addConfirmButtonFunctionality();
 }
 
 function removeCurrCharacter() {
@@ -77,4 +78,13 @@ function addConfirmButton() {
         confirmButtonDiv.appendChild(confirmButton);
         body.appendChild(confirmButtonDiv);
     }
+}
+
+function addConfirmButtonFunctionality () {
+    const confirmButton = document.getElementById('confirm-selection-button');
+    confirmButton.addEventListener('click', confirmPlayer)
+}
+
+function confirmPlayer() {
+    window.location.href = "game.html"
 }
