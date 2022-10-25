@@ -1,0 +1,81 @@
+body {
+    display: grid;
+    grid-template-rows: 20% 60% 20%;
+    grid-template-columns: 30% 45% 30%;
+    grid-template-areas: 
+        ". header-text ."
+        "player1-avatar gameboard player2-avatar"
+        ". buttons .";
+}
+
+#game-status-text {
+    grid-area: header-text;
+}
+
+#player1-avatar {
+    grid-area: player1-avatar;
+}
+
+#player2-avatar {
+    grid-area: player2-avatar;
+}
+
+#buttons-div {
+    grid-area: buttons;
+}
+
+#game-status-text {
+    font-size: 4em;
+}
+
+#buttons-div {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#buttons-div * {
+    font-size: 2.5em;
+    margin-left: 1em;
+    padding: 0 2em;
+}
+
+img {
+    height: 80%;
+    margin: 0 auto;
+}
+
+#gameboard {
+    grid-area: gameboard;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#one {
+    border-left: none;
+    border-top: none;
+}
+
+#gameboard button {
+    width: 33.3%;
+    height: 33.3%;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+#one, #two, #three {
+    border-top: none;
+}
+
+#three, #six, #nine {
+    border-right: none;
+}
+
+#one, #four, #seven {
+    border-left: none;
+}
+
+#seven, #eight, #nine {
+    border-bottom: none;
+}
