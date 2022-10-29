@@ -44,7 +44,6 @@
         allChildren.forEach(child => child.remove());
     }
 
-    // returns all necessary elements from button id
     const characterSelectObj = (id) => {
         let characterName = "";
         let bigAvatarImgSrc =  "hololive-assets/big/" + id + ".png"
@@ -68,7 +67,7 @@
         }
         return {id, characterName, bigAvatarImgSrc, characterColorClass}
     }
-    
+
     function removeButtonBackgroundColor() {
         const buttons = Array.from(document.querySelectorAll("button"));
         buttons.forEach(button => {
@@ -114,7 +113,7 @@
         const confirmButton = document.getElementById('confirm-selection-button');
         confirmButton.addEventListener('click', function () {
             if(currPlayer === 1){
-                window.localStorage.setItem("p1name", currCharacterObj.CharacterName);
+                window.localStorage.setItem("p1name", currCharacterObj.characterName);
                 currPlayer = currPlayer + 1;
                 grayOutCharacterDOM(currCharacterObj);
                 //prevents character from being chosen again
@@ -122,7 +121,7 @@
                 renderCharacterSelect();
             }
             else if(currPlayer === 2) {
-                window.localStorage.setItem("p2name", currCharacterObj.CharacterName);
+                window.localStorage.setItem("p2name", currCharacterObj.characterName);
                 window.location.href = "game.html"
             }
         })

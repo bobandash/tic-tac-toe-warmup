@@ -12,7 +12,7 @@
 
    function recordSelections() {
         const opponentType = document.getElementById('opponent-type').value;
-        window.localStorage.setItem("opponent-type", opponentType);
+        localStorage.setItem("opponent-type", opponentType);
         if (opponentType === "ai") {
             const aiDifficulty = document.getElementById("ai-difficulty").value;
             window.localStorage.setItem("ai-difficulty", aiDifficulty);
