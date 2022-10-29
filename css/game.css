@@ -79,3 +79,7 @@ img {
 #seven, #eight, #nine {
     border-bottom: none;
 }
+
+.character-icon {
+    height: 80%;
+}
