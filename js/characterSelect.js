@@ -137,6 +137,4 @@
     function disableCharacter(currCharacterObj) {
         allCharacterIds.splice(currCharacterObj.id, 1);
     }
-
-
 })();
