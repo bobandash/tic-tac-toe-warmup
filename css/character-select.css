@@ -1,3 +1,11 @@
+:root {
+    --watson-color: yellow;
+    --gura-color: blue;
+    --mori-color: pink;
+    --kiara-color: red;
+    --ina-color: purple;
+}
+
 body {
     display: grid;
     grid-template-rows: 60% 20% 20%;
@@ -7,12 +15,8 @@ body {
         "confirm-button";
 }
 
-:root {
-    --watson-color: yellow;
-    --gura-color: blue;
-    --mori-color: pink;
-    --kiara-color: red;
-    --ina-color: purple;
+button {
+    background-color: white;
 }
 
 #watson:hover {
@@ -69,7 +73,6 @@ body {
     width: 10em;
     margin-right: 2em;
     border: 1px solid black;
-    background-color: white;
 }
 
 #smol-character-select button img {
@@ -80,4 +83,28 @@ body {
 #confirm-selection-button {
     font-size: 4em;
     padding: 0.25em 1em;
+}
+
+.mori-color {
+    background-color: pink;
+}
+
+.watson-color {
+    background-color: yellow;
+}
+
+.gura-color {
+    background-color: blue;
+}
+
+.kiara-color {
+    background-color: red;
+}
+
+.ina-color {
+    background-color: purple;
+}
+
+#selected-color {
+    background-color: gray;
 }
