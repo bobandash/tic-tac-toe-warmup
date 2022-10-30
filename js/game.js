@@ -75,7 +75,31 @@ const displayController = (() => {
         buttonElem.appendChild(characterImg);
     }
 
-    return {renderGameDOM, addCharacterImgToCell};
+    function changeHeaderToWinnerText(playerObj) {
+        const gameStatusText = document.getElementById("game-status-text");
+        gameStatusText.innerText = `${playerObj.getName()} Wins`;
+    }
+
+    function changeHeaderToOtherPlayerText(playerObj) {
+        const gameStatusText = document.getElementById("game-status-text");
+        gameStatusText.innerText = `${playerObj.getName()}'s Turn`;
+    }
+
+    function changeHeaderToOtherPlayerText(playerObj) {
+        const gameStatusText = document.getElementById("game-status-text");
+        gameStatusText.innerText = `${playerObj.getName()}'s Turn`;
+    }
+
+    function changeHeaderToTieText() {
+        const gameStatusText = document.getElementById("game-status-text");
+        gameStatusText.innerText = `Tie Game`;       
+    }
+
+    function restartBoard() {
+
+    }
+
+    return {renderGameDOM, addCharacterImgToCell, changeHeaderToWinnerText, changeHeaderToOtherPlayerText, changeHeaderToTieText};
 })();
 
 
@@ -107,33 +131,72 @@ const Gameboard = (() => {
     let player2 = player(player2Name);
 
     displayController.renderGameDOM(player1, player2);
+    //adds functionality to all cells in tic tac toe game
     allButtons.forEach((button, index) => {
         button.addEventListener('click', addMove.bind(button, index), {once: true});
     })
 
-    
     function isWinner(playerObj) {
-        return false;
+        const playerName = playerObj.getName();
+        let hasWon = false;
+        winningCombinations.forEach(winningCombination => {
+            if(winningCombination.every(checkCellIndex)){
+                hasWon = true;
+            }
+        })
+        function checkCellIndex(index) {
+            return gameboardArray[index] === playerName;
+        }
+
+        return hasWon;
+    }
+
+    function isTie() {
+        return !(gameboardArray.includes(''));
     }
 
     function addMove(index) {
         let currPlayer;
-        if(isPlayerOneTurn ? currPlayer = player1 : currPlayer = player2); 
+        let otherPlayer;
+
+        if(isPlayerOneTurn) {
+            currPlayer = player1;
+            otherPlayer = player2;
+        } 
+        else {
+            currPlayer = player2;
+            otherPlayer = player1;
+        }
+
         gameboardArray[index] = currPlayer.getName();
         displayController.addCharacterImgToCell(this, currPlayer);
         if(isWinner(currPlayer)){
-
+            displayController.changeHeaderToWinnerText(currPlayer);
+            endGame();
+        }
+        else if(isTie()) {
+            displayController.changeHeaderToTieText();
+            endGame();
         }
         else {
             changeTurn();
+            displayController.changeHeaderToOtherPlayerText(otherPlayer);
         }
     }
-
 
     function changeTurn() {
         isPlayerOneTurn = !isPlayerOneTurn;
     }
 
+    function endGame() {
+        removeAllButtonEventListeners();
+    }
 
+    function removeAllButtonEventListeners() {
+        allButtons.forEach(button => {
+            let new_element = button.cloneNode(true);
+            button.parentNode.replaceChild(new_element, button);
+        })
+    }
 
 })();
