@@ -83,32 +83,49 @@ const Gameboard = (() => {
     //did not add ai features yet
     const opponentType = window.localStorage.getItem("opponent-type");
     const aiDifficulty = window.localStorage.getItem("ai-difficulty");
+    const winningCombinations =[
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+
     let player1 = player(player1Name);
     let player2 = player(player2Name);
 
     displayController.renderGameDOM(player1, player2);
-    allButtons.forEach(button => {
-        button.addEventListener('click', addMove, {once: true});
+    allButtons.forEach((button, index) => {
+        button.addEventListener('click', addMove.bind(button, index), {once: true});
     })
 
+    
+    function isWinner(playerObj) {
 
-    function isValidMove() {
-        return true;
     }
 
-    function addMove() {
+    function addMove(index) {
         let currPlayer;
         if(isPlayerOneTurn ? currPlayer = player1 : currPlayer = player2); 
-
+        gameboardArray[index] = currPlayer.getName();
         displayController.addCharacterImgToCell(this, currPlayer);
-        //need to add character name to gameboardArray
+        if(isWinner(currPlayer)){
+
+        }
+        else {
+            changeTurn();
+        }
+    }
+
+
+    function changeTurn() {
         isPlayerOneTurn = !isPlayerOneTurn;
-
     }
 
-    function hasWinner(playerObj) {
-
-    }
 
 
 })();
