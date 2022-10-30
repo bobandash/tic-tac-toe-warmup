@@ -1,6 +1,7 @@
 //for player
 const player = (name) => {
     let condensedName = getCondensedName(name);
+    let score = 0;
     function getCondensedName(fullName) {
         let condensedName;
         switch(fullName){
@@ -35,7 +36,15 @@ const player = (name) => {
         return "hololive-assets/smol/" + condensedName + ".png";
     }
 
-    return {getName, getBigAvatarSrc, getCharacterIconSrc};
+    function getScore() {
+        return score;
+    }
+
+    function incrementScore() {
+        score = score + 1;
+    }
+
+    return {getName, getBigAvatarSrc, getCharacterIconSrc, getScore, incrementScore};
 }
 
 
@@ -94,7 +103,6 @@ const Gameboard = (() => {
         [2, 4, 6]
     ];
 
-
     let player1 = player(player1Name);
     let player2 = player(player2Name);
 
@@ -105,7 +113,7 @@ const Gameboard = (() => {
 
     
     function isWinner(playerObj) {
-
+        return false;
     }
 
     function addMove(index) {
