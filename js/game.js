@@ -5,6 +5,17 @@ const GAME_STATE = {
     WIN: "Win"
 };
 
+const WINNING_COMBINATIONS =[
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+];
+
 //for player
 const player = (name) => {
     let condensedName = getCondensedName(name);
@@ -56,14 +67,71 @@ const player = (name) => {
 
 
 const aiPlayer = (name, difficulty) => {
-    function makeMove()
+    const prototype = player(name);
+    //should just return the index of the array with the best move
+    function makeMove(gameBoardArray)
     {
+        switch(difficulty){
+            case "Easy":
+                return easyAIMove(gameBoardArray);
+            case "Medium":
+                return mediumAIMove(gameboardArray);
+            case "Hard":
+                return hardAIMove(gameboardArray);
+        }
+    }
+
+    //easy ai is find the closest empty cell in the gameboard array
+    function easyAIMove(gameBoardArray) {
+        let firstEmptyIndex;
+        for(let i = 0; i < gameBoardArray.length; i++) {
+            if(gameBoardArray[i] !== '') {
+                firstEmptyIndex = i;
+                break;
+            }
+        }
+        return firstEmptyIndex;
+    }
+
+    //medium ai is if the other player is going to win, block it
+    //otherwise, find the closest empty cell in the gameboard array
+    function mediumAIMove(gameboardArray) {
+        let blockOtherPlayerCellIndex = '';
+        WINNING_COMBINATIONS.forEach(winningCombination => {
+            //records number of moves other player has in this combination
+            let numMovesOtherPlayer = 0;
+            winningCombination.forEach(cell => {
+                if(gameboardArray[cell] !== '' && gameboardArray[cell] !== name) {
+                    numMovesOtherPlayer++;
+                }
+            })
+            if(numMovesOtherPlayer = 2){
+                winningCombination.forEach(cell => {
+                    if(gameboardArray[cell] === '') {
+                        blockOtherPlayerCellIndex++;
+                    }
+                })               
+            }
+
+        })
+
+        if(blockOtherPlayerCellIndex === '') {
+            blockOtherPlayerCellIndex = easyAIMove(gameboardArray);;
+        }
+        return blockOtherPlayerCellIndex;
+    }
+
+    //minimax algorithm, impossible to win
+    function hardAIMove(gameboardArray) {
 
     }
+
+    return Object.assign({}, prototype, {makeMove});
 }
 
 //shows the current status of the game
 const displayController = (() => {
+
     //inital render of gameboard
     function renderGameDOM(player1, player2) {
         const player1AvatarElem = document.getElementById("player1-avatar");
@@ -88,11 +156,6 @@ const displayController = (() => {
             newGameBtn.remove();
         }
     }
-
-/*     <div id = "buttons-div">
-        <button>Home</button>
-        <button>New Game</button>
-    </div> */
 
     function addHomeNewGameBtnsDOM() {
         const parentDiv = document.getElementById('buttons-div');
@@ -148,16 +211,6 @@ const Gameboard = (() => {
     //did not add ai features yet
     const opponentType = window.localStorage.getItem("opponent-type");
     const aiDifficulty = window.localStorage.getItem("ai-difficulty");
-    const winningCombinations =[
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ];
 
     let player1 = player(player1Name);
     let player2 = player(player2Name);
@@ -207,7 +260,7 @@ const Gameboard = (() => {
     function isWinner(playerObj) {
         const playerName = playerObj.getName();
         let hasWon = false;
-        winningCombinations.forEach(winningCombination => {
+        WINNING_COMBINATIONS.forEach(winningCombination => {
             if(winningCombination.every(checkCellIndex)){
                 hasWon = true;
             }
