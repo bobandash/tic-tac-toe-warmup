@@ -62,7 +62,11 @@ const player = (name) => {
         score = score + 1;
     }
 
-    return {getName, getBigAvatarSrc, getCharacterIconSrc, getScore, incrementScore};
+    function isAi() {
+        return false;
+    }
+
+    return {getName, getBigAvatarSrc, getCharacterIconSrc, getScore, incrementScore, isAi};
 }
 
 
@@ -75,9 +79,9 @@ const aiPlayer = (name, difficulty) => {
             case "Easy":
                 return easyAIMove(gameBoardArray);
             case "Medium":
-                return mediumAIMove(gameboardArray);
+                return mediumAIMove(gameBoardArray);
             case "Hard":
-                return hardAIMove(gameboardArray);
+                return hardAIMove(gameBoardArray);
         }
     }
 
@@ -85,7 +89,7 @@ const aiPlayer = (name, difficulty) => {
     function easyAIMove(gameBoardArray) {
         let firstEmptyIndex;
         for(let i = 0; i < gameBoardArray.length; i++) {
-            if(gameBoardArray[i] !== '') {
+            if(gameBoardArray[i] === '') {
                 firstEmptyIndex = i;
                 break;
             }
@@ -93,32 +97,76 @@ const aiPlayer = (name, difficulty) => {
         return firstEmptyIndex;
     }
 
-    //medium ai is if the other player is going to win, block it
+    //medium ai is:
+    //if the ai is going to win, place the mark
+    //if the other player is going to win, find one and block it
     //otherwise, find the closest empty cell in the gameboard array
+    //use the array methods to make less confusing
     function mediumAIMove(gameboardArray) {
-        let blockOtherPlayerCellIndex = '';
+        let moveIndex = '';
+        //check almost won for ai
+        if(checkAlmostWon(true, gameboardArray)){
+            moveIndex = getSuboptimalMove(true, gameboardArray);
+        }
+        //check almost won for player
+        else if(checkAlmostWon(false, gameboardArray)) {
+            moveIndex = getSuboptimalMove(false, gameboardArray);
+        }
+        else{
+            moveIndex = easyAIMove(gameboardArray);;
+        }
+        return moveIndex;
+    }
+
+    function checkAlmostWon(isAiPlayer, gameboardArray){
+        let almostWon = false;
         WINNING_COMBINATIONS.forEach(winningCombination => {
-            //records number of moves other player has in this combination
-            let numMovesOtherPlayer = 0;
+            let currPlayerMovesCounter = 0;
+            let emptyCellsCounter = 0;
             winningCombination.forEach(cell => {
-                if(gameboardArray[cell] !== '' && gameboardArray[cell] !== name) {
-                    numMovesOtherPlayer++;
+                if(gameboardArray[cell] === ''){
+                    emptyCellsCounter++;
+                }
+                else if(gameboardArray[cell] !== '') {
+                    if(isAiPlayer && gameboardArray[cell] === name)
+                        currPlayerMovesCounter++;
+                    else if(!isAiPlayer && gameboardArray[cell] !== name)
+                        currPlayerMovesCounter++;
+                }
+                if(emptyCellsCounter === 1 && currPlayerMovesCounter === 2){
+                    almostWon = true;
                 }
             })
-            if(numMovesOtherPlayer = 2){
-                winningCombination.forEach(cell => {
-                    if(gameboardArray[cell] === '') {
-                        blockOtherPlayerCellIndex++;
-                    }
-                })               
-            }
-
         })
+        return almostWon;
+    }
 
-        if(blockOtherPlayerCellIndex === '') {
-            blockOtherPlayerCellIndex = easyAIMove(gameboardArray);;
-        }
-        return blockOtherPlayerCellIndex;
+    //basically what is going on right now is that this isn't considering tiles in the middle
+    //and does not consider if there's already the player avatar inside the gameboard array
+    function getSuboptimalMove(isAiPlayer, gameboardArray){
+        let suboptimalMoveIndex;
+        WINNING_COMBINATIONS.forEach(winningCombination => {
+            let currPlayerMovesCounter = 0;
+            let emptyCellsCounter = 0;
+            let emptyCellIndex;
+            winningCombination.forEach(cell => {
+                if(gameboardArray[cell] === ''){
+                    emptyCellsCounter++;
+                    emptyCellIndex = cell;
+                }
+                else if(gameboardArray[cell] !== '') {
+                    if(isAiPlayer && gameboardArray[cell] === name)
+                        currPlayerMovesCounter++;
+                    else if(!isAiPlayer && gameboardArray[cell] !== name)
+                        currPlayerMovesCounter++;
+                }
+            })
+
+            if(currPlayerMovesCounter == 2 && emptyCellsCounter == 1){
+                suboptimalMoveIndex = emptyCellIndex;
+            }
+        })  
+        return suboptimalMoveIndex;
     }
 
     //minimax algorithm, impossible to win
@@ -126,7 +174,11 @@ const aiPlayer = (name, difficulty) => {
 
     }
 
-    return Object.assign({}, prototype, {makeMove});
+    function isAi(){
+        return true;
+    }
+
+    return Object.assign({}, prototype, {makeMove, isAi});
 }
 
 //shows the current status of the game
@@ -213,7 +265,9 @@ const Gameboard = (() => {
     const aiDifficulty = window.localStorage.getItem("ai-difficulty");
 
     let player1 = player(player1Name);
-    let player2 = player(player2Name);
+    let player2;
+    if(opponentType === 'ai' ? player2 = aiPlayer(player2Name, aiDifficulty) : player2 = player(player2Name));
+
     initializeGame();
 
     function initializeGame() {
@@ -254,6 +308,10 @@ const Gameboard = (() => {
         else {
             changeTurn();
             displayController.changeHeaderText(GAME_STATE.PLAYING, otherPlayer);
+            //issue is that you can click other buttons in the .2 seconds
+            if(otherPlayer.isAi()){
+                allButtons[otherPlayer.makeMove(gameboardArray)].click();
+            }
         }
     }
 
@@ -268,7 +326,6 @@ const Gameboard = (() => {
         function checkCellIndex(index) {
             return gameboardArray[index] === playerName;
         }
-
         return hasWon;
     }
 
