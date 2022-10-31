@@ -141,8 +141,7 @@ const aiPlayer = (name, difficulty) => {
         return almostWon;
     }
 
-    //basically what is going on right now is that this isn't considering tiles in the middle
-    //and does not consider if there's already the player avatar inside the gameboard array
+    //suboptimal move for medium ai, only way to win is to have 2 possible options for victory
     function getSuboptimalMove(isAiPlayer, gameboardArray){
         let suboptimalMoveIndex;
         WINNING_COMBINATIONS.forEach(winningCombination => {
