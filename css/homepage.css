@@ -9,9 +9,9 @@ label, h1 {
 }
 
 body {
-    background: url("/hololive-assets/backgrounds/homepage-bg.jpg");
+    background: url("/hololive-assets/backgrounds/homepage-bg.jpg") no-repeat;
     background-size: cover;
-
+    height: 100vh;
     display: grid;
     grid-template-columns: 
         1fr minmax(300px, 1600px) 1fr;
@@ -54,14 +54,23 @@ body {
     text-align: center;
 }
 
-span {
-    display: contents;
-}
-
 #holomyth-background {
     grid-area: hololive-image;
-    margin: 0 auto;
-    height: 100%;
+    margin: auto;
+}
+
+@media only screen and (min-width: 800px){
+    #holomyth-background {
+        grid-area: hololive-image;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    #holomyth-background {
+        grid-area: hololive-image;
+        width: 90%;
+    }
 }
 
 #user-inputs {
