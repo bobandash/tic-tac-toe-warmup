@@ -9,9 +9,10 @@ label, h1 {
 }
 
 body {
+    height: 100vh;
+    width: 100vw;
     background: url("/hololive-assets/backgrounds/homepage-bg.jpg") no-repeat;
     background-size: cover;
-    height: 100vh;
     display: grid;
     grid-template-columns: 
         1fr minmax(300px, 1600px) 1fr;
