@@ -1,9 +1,17 @@
 
 :root {
     --negative-margin-logo: -40px;
+    --hololive-color: rgb(36, 250, 250);
+}
+
+label, h1 {
+    color: var(--hololive-color);
 }
 
 body {
+    background: url("/hololive-assets/backgrounds/homepage-bg.jpg");
+    background-size: cover;
+
     display: grid;
     grid-template-columns: 
         1fr minmax(300px, 1600px) 1fr;
@@ -23,6 +31,7 @@ body {
     padding-bottom: 2em;
 }
 
+
 #hololive-logo {
     height: 6em;
     align-self: column;
@@ -31,23 +40,22 @@ body {
 #header-text {
     display: flex;
     flex-direction: column;
-
+    font-size: 1.5em;
 }
 
 #header-text * {
     margin: 0;
-    text-align: left;
     margin-left: var(--negative-margin-logo);
 }
 
 #tic-tac-toe-text {
     font-size: 3.5em;
     margin-bottom: 0em;
+    text-align: center;
 }
 
-#holomyth-ed-text {
-    color: #00FFF0;
-    margin-left: calc(var(--negative-margin-logo) + .25em);
+span {
+    display: contents;
 }
 
 #holomyth-background {
@@ -74,8 +82,8 @@ body {
 
 #selects * {
     margin-top: .5em;
+    border-radius: 4px;
 }
-
 
 label, select, button {
     font-size: 2em;
@@ -91,4 +99,10 @@ label, select, button {
     margin-top: 1em;
     padding: .5em;
     background-color: white;
+    border-radius: 10px;
 }
+
+#start-game:hover {
+    padding: .6em;
+}
+
