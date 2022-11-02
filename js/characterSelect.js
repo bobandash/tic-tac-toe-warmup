@@ -41,13 +41,18 @@
 
     function removeCurrCharacterDOM() {
         const allChildren = Array.from(document.querySelectorAll("#big-avatar *"))
+        const body = document.querySelector('body');
         allChildren.forEach(child => child.remove());
+
+        //don't know if there's a better way to do
+        body.classList = '';
     }
 
     const characterSelectObj = (id) => {
         let characterName = "";
         let bigAvatarImgSrc =  "hololive-assets/big/" + id + ".png"
         let characterColorClass = id + "-color";
+        let backgroundClass = id + "-background";
         switch(id) {
             case "watson":
                 characterName = "Amelia Watson";
@@ -65,7 +70,7 @@
                 characterName = "Ninomae Ina'nis";
                 break;
         }
-        return {id, characterName, bigAvatarImgSrc, characterColorClass}
+        return {id, characterName, bigAvatarImgSrc, characterColorClass, backgroundClass}
     }
 
     function removeButtonBackgroundColor() {
@@ -77,11 +82,14 @@
     }
 
     function addCurrCharacterDOM(currCharacterObj) {
+        const body = document.querySelector('body');
         const parentElem = document.getElementById("big-avatar");
         const avatarImg = document.createElement('img');
         const avatarName = document.createElement('h1');
 
+        body.classList.add(currCharacterObj.backgroundClass);
         avatarName.innerText = currCharacterObj.characterName;
+        avatarName.setAttribute('id','character-name-text');
         avatarImg.src = currCharacterObj.bigAvatarImgSrc;
         avatarImg.setAttribute('id', 'character-image');
         parentElem.appendChild(avatarName);

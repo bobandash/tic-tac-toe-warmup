@@ -6,7 +6,13 @@
     --ina-color: purple;
 }
 
+html, body {
+    margin: 0;
+}
+
 body {
+    height: 100vh;
+    width: 100vw;
     display: grid;
     grid-template-rows: 60% 20% 20%;
     grid-template-areas: 
@@ -48,6 +54,10 @@ button {
     flex-direction: column;
 }
 
+h1 {
+    font-size: 3em;
+}
+
 #default-big-avatar {
     font-size: 5em;
 }
@@ -55,6 +65,9 @@ button {
 #character-name-text {
     font-size: 4em;
     margin-bottom: 0em;
+    color: white;
+	-webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
 }
 
 #character-image {
@@ -85,6 +98,10 @@ button {
     padding: 0.25em 1em;
 }
 
+#confirm-selection-button:hover {
+    padding: .5em 1.2em;
+}
+
 .mori-color {
     background-color: pink;
 }
@@ -107,4 +124,84 @@ button {
 
 #selected-color {
     background-color: gray;
+}
+
+
+.mori-background {
+    background: url(../hololive-assets/backgrounds/character-select/mori-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.watson-background {
+    background: url(../hololive-assets/backgrounds/character-select/watson-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.gura-background {
+    background: url(../hololive-assets/backgrounds/character-select/gura-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.kiara-background {
+    background: url(../hololive-assets/backgrounds/character-select/kiara-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.ina-background {
+    background: url(../hololive-assets/backgrounds/character-select/ina-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* for phone screen */
+@media only screen and (max-width: 500px){
+
+    body {
+        grid-template-rows: 50% 25% 25%;
+    }
+
+    #smol-character-select {
+        grid-area: character-select-buttons;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #smol-character-select button {
+        border-radius: 90%;
+        height: 6em;
+        width: 6em;
+    }
+    
+    #smol-character-select button:last-child {
+        margin: 0;
+    }
+    #smol-character-select button:nth-child(3) {
+        margin: 0;
+    }
+    #smol-character-select button img {
+        width: 95%;
+        height: 95%;
+    }
+
+    #confirm-selection-button {
+        font-size: 2em;
+        margin-top: 1em;
+        padding: 0.25em 1em;
+    }
+
+    #character-image{
+        height: 70%;
+    }
+
+}
+
+@media only screen and (min-width: 400px) and (max-width: 500px){
+    #smol-character-select button {
+        margin-right: 2.5em;
+    }
 }
