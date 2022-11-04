@@ -104,11 +104,11 @@
     function addConfirmButtonDOM() {
         const body = document.querySelector("body");
         let confirmButtonDiv = document.getElementById("confirm-selection-div");
+        const confirmButton = document.createElement('button');
         if(confirmButtonDiv === null)
         {
             confirmButtonDiv = document.createElement('div');
             confirmButtonDiv.id = "confirm-selection-div";
-            confirmButton = document.createElement('button');
             confirmButton.id = "confirm-selection-button";
             confirmButton.innerText = "Confirm"
     
@@ -129,8 +129,10 @@
                 renderCharacterSelect();
             }
             else if(currPlayer === 2) {
-                window.localStorage.setItem("p2name", currCharacterObj.characterName);
-                window.location.href = "game.html"
+                if (currCharacterObj.characterName !== window.localStorage.getItem("p1name")){
+                    window.localStorage.setItem("p2name", currCharacterObj.characterName);
+                    window.location.href = "game.html"
+                }
             }
         })
     }

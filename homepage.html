@@ -21,11 +21,17 @@
         <div id = "form">
             <div id = "labels">
                 <label for = "opponent-type">Versus</label>
+                <label for = "ai-difficulty" class = "hidden">Difficulty</label>
             </div>
             <div id = "selects">
                 <select name = "opponent-type" id = "opponent-type">
                     <option value = "player">Player</option>
                     <option value = "ai">AI</option>
+                </select>
+                <select name = "ai-difficulty" id = "ai-difficulty" class = "hidden">
+                    <option value = "Easy">Easy</option>
+                    <option value = "Medium">Medium</option>
+                    <option value = "Hard">Hard</option>
                 </select>
             </div>
         </div>

@@ -80,10 +80,19 @@ body {
     #header-text{
         font-size: 1em;
     }
+
+    #header-text * {
+        margin-left: -20px;
+    }
+
+    #hololive-logo {
+        height: 4em;
+    }
     body {
         grid-template-rows:
         30% 30% 40%;
     }
+
 }
 
 #user-inputs {
@@ -93,6 +102,8 @@ body {
 #labels, #selects {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
 }
 
@@ -128,3 +139,6 @@ label, select, button {
     padding: .6em;
 }
 
+.hidden {
+    visibility: hidden;
+}
