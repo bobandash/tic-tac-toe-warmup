@@ -1,3 +1,5 @@
+https://bobandash.github.io/tic-tac-toe-warmup/homepage.html
+
 I used this tic-tac-toe project in order to review what I learned in The Odin Project before I took an extended break.
 
 The project was a Hololive-themed tic-tac-toe, where the AI and Player could choose their favorite Generation 1 Hololive EN members and play tic-tac toe.
